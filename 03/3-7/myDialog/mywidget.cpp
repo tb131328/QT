@@ -5,6 +5,9 @@
 #include <QFileDialog>
 #include <QFontDialog>
 #include <QInputDialog>
+#include <QMessageBox>
+#include <QProgressDialog>
+#include <QErrorMessage>
 
 myWidget::myWidget(QWidget *parent) :
     QWidget(parent),
@@ -71,7 +74,74 @@ void myWidget::on_pushButton_4_clicked()
         qDebug()<<"item ="<<item;
 }
 
+void myWidget::on_pushButton_5_clicked()
+{
+    int iret =0;
+    iret =QMessageBox::question(this,tr("问题对话框"),tr("你了解QT吗？"),QMessageBox::Yes,QMessageBox::No);
+    if(QMessageBox::Yes == iret) qDebug()<<tr("这就对了嘛");
+
+    iret =QMessageBox::information(this,tr("信息对话框"),tr("这是QT书！"),QMessageBox::Ok);
+    if(QMessageBox::Ok == iret) qDebug()<<tr("提示");
+
+    iret =QMessageBox::warning(this,tr("警告对话框"),tr("不能提前关闭！"),QMessageBox::Abort);
+    if(QMessageBox::Abort == iret) qDebug()<<tr("警告");
+
+    iret =QMessageBox::critical(this,tr("严重错误对话款"),tr("发现一个严重错误，需要关闭全部打开文件"),QMessageBox::YesAll);
+    if(QMessageBox::YesAll == iret) qDebug()<<tr("严重错误");
+
+    QMessageBox::about(this,tr("关于对话框"),tr("这是QT4.8"));
+}
+
+void myWidget::on_pushButton_8_clicked()
+{
+    QProgressDialog dialog(tr("文件复制进度"),tr("取消"),0,5000,this);
+    dialog.setWindowTitle(tr("进度对话框"));
+    dialog.setWindowModality(Qt::WindowModal);
+    dialog.show();
+    for(int i=0; i<500000;i++)
+    {
+        dialog.setValue(i);
+        QCoreApplication::processEvents();
+        if(dialog.wasCanceled()) break;
+    }
+    dialog.setValue(500000);
+    qDebug()<<tr("复制结束");
+}
 
 
+void myWidget::on_pushButton_6_clicked()
+{
+    QErrorMessage *dialog =new QErrorMessage(this);
+    dialog->setWindowTitle(tr("这是消息对话框"));
+    dialog->showMessage(tr("消息提示"));
+}
 
+void myWidget::on_pushButton_7_clicked()
+{
+    QWizard wizard(this);
+    wizard.addPage(createPage1());
+    wizard.addPage(createPage2());
+    wizard.addPage(createPage3());
+    wizard.exec();
+}
 
+QWizard * myWidget::createPage1()
+{
+    QWizardPage * page =new QWizardPage;
+    page->setTitle(tr("介绍"));
+    return page;
+}
+
+QWizard * myWidget::createPage2()
+{
+    QWizardPage * page =new QWizardPage;
+    page->setTitle(tr("选择信息"));
+    return page;
+}
+
+QWizard * myWidget::createPage2()
+{
+    QWizardPage * page =new QWizardPage;
+    page->setTitle(tr("结束"));
+    return page;
+}
