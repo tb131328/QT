@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+namespace Ui{
+    class HelloDialog;
+}
 class HelloDialog : public QWidget
 {
     Q_OBJECT
@@ -12,6 +15,9 @@ public:
 signals:
 
 public slots:
+
+private:
+    Ui::HelloDialog *ui;
 };
 
 #endif // HELLODIALOG_H
