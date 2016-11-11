@@ -35,9 +35,9 @@ private slots:
 
 private:
     Ui::myWidget *ui;
-    QWizardPage* page1;
-    QWizardPage* page2;
-    QWizardPage* page3;
+    QWizardPage* createPage1();
+    QWizardPage* createPage2();
+    QWizardPage* createPage3();
 };
 
 #endif // MYWIDGET_H

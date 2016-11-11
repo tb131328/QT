@@ -125,21 +125,21 @@ void myWidget::on_pushButton_7_clicked()
     wizard.exec();
 }
 
-QWizard * myWidget::createPage1()
+QWizardPage * myWidget::createPage1()
 {
     QWizardPage * page =new QWizardPage;
     page->setTitle(tr("介绍"));
     return page;
 }
 
-QWizard * myWidget::createPage2()
+QWizardPage * myWidget::createPage2()
 {
     QWizardPage * page =new QWizardPage;
     page->setTitle(tr("选择信息"));
     return page;
 }
 
-QWizard * myWidget::createPage2()
+QWizardPage * myWidget::createPage3()
 {
     QWizardPage * page =new QWizardPage;
     page->setTitle(tr("结束"));
