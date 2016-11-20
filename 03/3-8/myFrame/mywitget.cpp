@@ -1,5 +1,7 @@
 #include "mywitget.h"
 #include "ui_mywitget.h"
+#include <QPixmap>
+#include <QMovie>
 
 myWitget::myWitget(QWidget *parent) :
     QWidget(parent),
@@ -11,6 +13,16 @@ myWitget::myWitget(QWidget *parent) :
     //ui->frame->setFrameStyle(QFrame::Box|QFrame::Sunken);
     ui->frame->setLineWidth(5);
     ui->frame->setMidLineWidth(10);
+
+    QPixmap icon("logo.png");
+    ui->label->setPixmap(icon);
+    ui->label->resize(icon.width(),icon.height());
+
+    QMovie *movie =new QMovie("donghua.gif");
+    ui->label_2->setMovie(movie);
+    movie->start();
+
+
 }
 
 myWitget::~myWitget()
